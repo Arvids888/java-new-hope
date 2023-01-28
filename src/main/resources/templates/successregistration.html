@@ -5,7 +5,7 @@
     <title>You are successfully registered</title>
 </head>
 <body>
-    <div th:text="${status == 'error'} ? 'Some fields are empty' : Hello, ' + ${user.firstName} + '! You are successfully registered!"></div>
+    <div th:text="${status == 'error'} ? 'Some fields are empty' : 'Hello, ' + ${user.firstName} + '! You are successfully registered!'"></div>
     <div th:text="${user.phone}"></div>
 </body>
 </html>
