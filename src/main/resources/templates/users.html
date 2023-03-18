@@ -6,6 +6,7 @@
 </head>
 <body>
     <div th:each="user : ${users}">
+        <div th:text="${user.id}"></div>
         <div th:text="${user.firstName}"></div>
         <div th:text="${user.lastName}"></div>
         <div th:text="${user.email}"></div>

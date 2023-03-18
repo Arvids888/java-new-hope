@@ -23,7 +23,7 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String registerUser(@ModelAttribute User user, Model model) {
         User validatedUser = userService.validateUser(user);
-        model.addAttribute("status", validatedUser ==null ? "error" : "success");
+        model.addAttribute("status", validatedUser == null ? "error" : "success");
         model.addAttribute("user", validatedUser == null ? user : validatedUser);
         return "successRegistration";
 
