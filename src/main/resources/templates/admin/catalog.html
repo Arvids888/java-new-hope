@@ -16,7 +16,7 @@
         <input type="text" placeholder="Name" th:field="*{name}">
         <input type="text" placeholder="Description" th:field="*{description}">
         <input type="text" placeholder="Price" th:field="*{price}">
-        <select th:field="*{subcategoryId}">
+        <select th:field="*{subcategory.id}">
             <th:block th:each="subcat : ${subcategories}">
                 <option th:value="${subcat.id}" th:text="${subcat.name}"></option>
             </th:block>

@@ -73,18 +73,31 @@ public class CatalogDao {
 
     public List<CatalogItem> getItems() {
         RowMapper<CatalogItem> rowMapper = ((rs, rowNumber) -> mapItem(rs));
-        return jdbcTemplate.query("SELECT * FROM catalog", rowMapper);
+        return jdbcTemplate.query("SELECT c.id AS item_id, c.name AS item_name, c.description, c.price, " +
+                "s.id AS sub_id, s.name AS sub_name, t.id AS cat_id, t.name AS cat_name " +
+                "FROM catalog c " +
+                "INNER JOIN subcategories s ON c.subcategory_id = s.id " +
+                "INNER JOIN categories t ON s.category_id = t.id", rowMapper);
     }
 
     private CatalogItem mapItem(ResultSet rs) throws SQLException {
+        Category category = new Category();
+        category.setId(rs.getLong("cat_id"));
+        category.setName(rs.getString("cat_name"));
+
+        Subcategory subcategory = new Subcategory();
+        subcategory.setCategory(category);
+        subcategory.setId(rs.getLong("sub_id"));
+        subcategory.setName(rs.getString("sub_name"));
+
         CatalogItem item = new CatalogItem();
-        item.setId(rs.getLong("id"));
-        item.setSubcategoryId(rs.getLong("subcategory_id"));
-        item.setName(rs.getString("name"));
+        item.setSubcategory(subcategory);
+        item.setId(rs.getLong("item_id"));
+        item.setName(rs.getString("item_name"));
         item.setDescription(rs.getString("description"));
         item.setPrice(new BigDecimal(rs.getString("price")));
-        item.setBrandId(rs.getLong("brand_id"));
-        item.setImage(rs.getString("image"));
+//        item.setBrandId(rs.getLong("brand_id"));
+//        item.setImage(rs.getString("image"));
 
         return item;
 
@@ -92,6 +105,6 @@ public class CatalogDao {
 
     public void storeItem(CatalogItem item) {
         jdbcTemplate.update("INSERT INTO catalog (subcategory_id, name, description, price) VALUES (?, ?, ?, ?)",
-                item.getSubcategoryId(), item.getName(), item.getDescription(), item.getPrice());
+                item.getSubcategory().getId(), item.getName(), item.getDescription(), item.getPrice());
     }
 }

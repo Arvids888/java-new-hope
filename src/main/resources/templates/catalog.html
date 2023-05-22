@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="main-catalog">
+    <div th:each="item : ${items}" class="catalog-item">
+        <div>
+        <div th:text="${item.subcategory.category.name}" class="category"></div>
+            <div class="category-delim"> >> </div>
+            <div th:text="${item.subcategory.name}" class="category"></div>
+        </div>
+        <div><img th:src="@{/img/noimage.png}" class="catalog-img"></div>
+        <div th:text="${item.name}" class="catalog-name"></div>
+        <div th:text="${item.description}" class="catalog-descr"></div>
+        <div th:text="${item.price}" class="catalog-price"></div>
+    <div class="catalog-btn">Add to cart</div>
+    </div>
+</div>
+</body>
+</html>

@@ -15,6 +15,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.4.5'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.4.5'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.4.5'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.2'
 
 
 }
