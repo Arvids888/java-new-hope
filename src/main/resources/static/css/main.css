@@ -1,9 +1,16 @@
 .main-catalog {
-
+display: flex;
+width: 1130px;
+flex-wrap: wrap;
+margin: auto;
 }
 
 .catalog-item {
-
+border: 1px solid #CCC;
+border-radius: 5px;
+width: 250px;
+padding: 10px;
+margin: 5px;
 }
 
 .category {
@@ -15,7 +22,7 @@
 }
 
 .catalog-img {
-
+width: 100px;
 }
 
 .catalog-name{
@@ -31,5 +38,17 @@
 }
 
 .catalog-btn {
+background-color: #5EE123;
+height: 35px;
+border-radius: 5px;
+color: white;
+font-size: 23px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+}
 
+.catalog-btn:hover {
+background-color: #358611;
 }

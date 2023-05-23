@@ -9,7 +9,7 @@
 <div class="main-catalog">
     <div th:each="item : ${items}" class="catalog-item">
         <div>
-        <div th:text="${item.subcategory.category.name}" class="category"></div>
+            <div th:text="${item.subcategory.category.name}" class="category"></div>
             <div class="category-delim"> >> </div>
             <div th:text="${item.subcategory.name}" class="category"></div>
         </div>
@@ -17,7 +17,7 @@
         <div th:text="${item.name}" class="catalog-name"></div>
         <div th:text="${item.description}" class="catalog-descr"></div>
         <div th:text="${item.price}" class="catalog-price"></div>
-    <div class="catalog-btn">Add to cart</div>
+        <div class="catalog-btn">ADD TO CART</div>
     </div>
 </div>
 </body>
