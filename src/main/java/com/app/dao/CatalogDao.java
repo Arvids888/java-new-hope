@@ -80,6 +80,16 @@ public class CatalogDao {
                 "INNER JOIN categories t ON s.category_id = t.id", rowMapper);
     }
 
+    public List<CatalogItem> getItemsById(long id) {
+        RowMapper<CatalogItem> rowMapper = ((rs, rowNumber) -> mapItem(rs));
+        return jdbcTemplate.query("SELECT c.id AS item_id, c.name AS item_name, c.description, c.price, " +
+                "s.id AS sub_id, s.name AS sub_name, t.id AS cat_id, t.name AS cat_name " +
+                "FROM catalog c " +
+                "INNER JOIN subcategories s ON c.subcategory_id = s.id " +
+                "INNER JOIN categories t ON s.category_id = t.id " +
+                "WHERE c.subcategory_id = ?", rowMapper, id);
+    }
+
     private CatalogItem mapItem(ResultSet rs) throws SQLException {
         Category category = new Category();
         category.setId(rs.getLong("cat_id"));

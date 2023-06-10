@@ -40,6 +40,10 @@ public class AdminService {
         return catalogDao.getItems();
     }
 
+    public List<CatalogItem> getItemsById(long id) {
+        return catalogDao.getItemsById(id);
+    }
+
     public void storeItem(CatalogItem item) {
         String newPrice = item.getPrice().toString().replace(',', '.');
         item.setPrice(new BigDecimal(newPrice));
