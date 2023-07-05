@@ -26,4 +26,6 @@ public class LangDao {
                     return result;
                 }, landId, page, landId);
     }
+
+    public void storeLanguages()
 }
