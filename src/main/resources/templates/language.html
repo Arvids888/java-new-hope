@@ -6,7 +6,11 @@
 </head>
 <body>
 <div>
-    <form th:action="@{/language/}" th:object="" method="POST"></form>
+    <form th:action="@{/language}" th:object="${languageData}" method="POST">
+        <div><input type="text" placeholder="Language Name" th:field="*{name}"></div>
+        <div><input type="text" placeholder="Label" th:field="*{label}"></div>
+        <div><input type="submit" value="Register!"></div>
+    </form>
 </div>
 
 </body>

@@ -1,11 +1,15 @@
 package com.app.dao;
 
+import com.app.model.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class LangDao {
@@ -27,5 +31,25 @@ public class LangDao {
                 }, landId, page, landId);
     }
 
-    public void storeLanguages()
+    public List<Language> getLanguage() {
+        RowMapper<Language> rowMapper = (rs, rowNumber) -> mapLanguage(rs);
+
+        return jdbcTemplate.query("SELECT * FROM langs", rowMapper);
+    }
+
+    private Language mapLanguage(ResultSet rs) throws SQLException {
+        Language language = new Language();
+        language.setId(rs.getLong("id"));
+        language.setName(rs.getString("name"));
+        language.setLabel(rs.getString("label"));
+
+        return language;
+
+    }
+
+    public void storeLanguages(Language language) {
+        jdbcTemplate.update("INSERT INTO langs (name, label) VALUES (?, ?)",
+                language.getName(), language.getLabel());
+
+    }
 }

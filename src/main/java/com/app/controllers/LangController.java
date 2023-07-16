@@ -1,12 +1,11 @@
 package com.app.controllers;
 
+import com.app.model.Language;
 import com.app.services.LangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,5 +30,18 @@ public class LangController {
     @ResponseBody
     public void setLang(@PathVariable(value = "langId") long langId, HttpSession session) {
         session.setAttribute("lang", langId);
+    }
+
+    @GetMapping("/language")
+    public String getLanguage(Model model) {
+        model.addAttribute("languageData", new Language());
+
+        return "language";
+    }
+
+    @PostMapping("/language")
+    public String languageRegister(@ModelAttribute Language language, Model model) {
+        langService.storeLanguage(language);
+        return "redirect:/language";
     }
 }
