@@ -1,6 +1,7 @@
 package com.app.dao;
 
 import com.app.model.Language;
+import com.app.model.Translation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -51,5 +52,20 @@ public class LangDao {
         jdbcTemplate.update("INSERT INTO langs (name, label) VALUES (?, ?)",
                 language.getName(), language.getLabel());
 
+    }
+
+    private List<Translation> getTranslation() {
+        RowMapper<Translation> rowMapper = (rs, rowNumber) -> mapTranslation(rs);
+
+        return jdbcTemplate.query("SELECT " +
+                "FROM translations t " +
+                "INNER JOIN language u ON t.lang_id", rowMapper);
+    }
+
+    private Translation mapTranslation(ResultSet rs) throws SQLException {
+        Translation translation = new Translation();
+        translation.setText(rs.getString("text"));
+
+        return translation;
     }
 }
