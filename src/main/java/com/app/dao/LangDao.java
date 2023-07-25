@@ -57,15 +57,32 @@ public class LangDao {
     private List<Translation> getTranslation() {
         RowMapper<Translation> rowMapper = (rs, rowNumber) -> mapTranslation(rs);
 
-        return jdbcTemplate.query("SELECT " +
+        return jdbcTemplate.query("SELECT t.id AS t_id, t.page AS t_page, t.text AS t_text, t.key AS t_key," +
+                "l.id AS l_id, l.name AS l_name, l.label AS l_label" +
                 "FROM translations t " +
                 "INNER JOIN language u ON t.lang_id", rowMapper);
     }
 
     private Translation mapTranslation(ResultSet rs) throws SQLException {
+        Language language = new Language();
+
+        language.setId(rs.getLong("id"));
+        language.setName(rs.getString("name"));
+        language.setLabel(rs.getString("label"));
+
         Translation translation = new Translation();
+
+        translation.setLanguage(language);
+        translation.setId(rs.getLong("id"));
+        translation.setPage(rs.getString("page"));
         translation.setText(rs.getString("text"));
+        translation.setKey(rs.getString("key"));
 
         return translation;
+    }
+
+    public void storeTranslation(Translation translation) {
+        jdbcTemplate.update("INSERT INTO translations (lang_id, page, text, key) VALUES (?, ?, ?, ?)",
+        translation.getLanguage().getId(), translation.getPage(), translation.getText(), translation.getKey());
     }
 }

@@ -3,7 +3,7 @@ package com.app.model;
 public class Translation {
 
     private long id;
-    private long lang_id;
+    private Language language;
     private String page;
     private String text;
     private String key;
@@ -16,12 +16,12 @@ public class Translation {
         this.id = id;
     }
 
-    public long getLang_id() {
-        return lang_id;
+    public Language getLanguage() {
+        return language;
     }
 
-    public void setLang_id(long lang_id) {
-        this.lang_id = lang_id;
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public String getPage() {
