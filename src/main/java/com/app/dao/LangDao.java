@@ -60,8 +60,9 @@ public class LangDao {
         return jdbcTemplate.query("SELECT t.id AS t_id, t.page AS t_page, t.text AS t_text, t.key AS t_key," +
                 "l.id AS l_id, l.name AS l_name, l.label AS l_label" +
                 "FROM translations t " +
-                "INNER JOIN language u ON t.lang_id " +
-                "INNER JOIN translations tr ON "rowMapper);
+                "INNER JOIN language l ON t.lang_id = l.id " +
+                "INNER JOIN translations tr ON tr.page = t.text " +
+                "INNER JOIN translations ta ON ta.key = t.text", rowMapper);
     }
 
     private Translation mapTranslation(ResultSet rs) throws SQLException {
