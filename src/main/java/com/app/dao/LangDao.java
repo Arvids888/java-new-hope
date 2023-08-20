@@ -61,24 +61,27 @@ public class LangDao {
                 "l.id AS l_id, l.name AS l_name, l.label AS l_label" +
                 "FROM translations t " +
                 "INNER JOIN language l ON t.lang_id = l.id " +
-                "INNER JOIN translations tr ON tr.page = t.text " +
-                "INNER JOIN translations ta ON ta.key = t.text", rowMapper);
+                "INNER JOIN translations tp ON tp.page = t.text " +
+                "INNER JOIN translations tk ON tk.key = t.text", rowMapper);
     }
 
     private Translation mapTranslation(ResultSet rs) throws SQLException {
         Language language = new Language();
 
-        language.setId(rs.getLong("id"));
-        language.setName(rs.getString("name"));
-        language.setLabel(rs.getString("label"));
+        language.setId(rs.getLong("l_id"));
+        language.setName(rs.getString("l_name"));
+        language.setLabel(rs.getString("l_label"));
 
         Translation translation = new Translation();
 
         translation.setLanguage(language);
-        translation.setId(rs.getLong("id"));
-        translation.setPage(rs.getString("page"));
-        translation.setText(rs.getString("text"));
-        translation.setKey(rs.getString("key"));
+        translation.setId(rs.getLong("t_id"));
+        translation.setPage(rs.getString("t_page"));
+        translation.setPage(rs.getString("tp_page"));
+        translation.setText(rs.getString("t_text"));
+        translation.setKey(rs.getString("t_key"));
+        translation.setKey(rs.getString("tk_key"));
+
 
         return translation;
     }
