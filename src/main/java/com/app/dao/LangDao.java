@@ -58,7 +58,7 @@ public class LangDao {
         RowMapper<Translation> rowMapper = (rs, rowNumber) -> mapTranslation(rs);
 
         return jdbcTemplate.query("SELECT t.id AS t_id, t.page AS t_page, t.text AS t_text, t.key AS t_key," +
-                "l.id AS l_id, l.name AS l_name, l.label AS l_label" +
+                "l.id AS l_id, l.name AS l_name, l.label AS l_label " +
                 "FROM translations t " +
                 "INNER JOIN language l ON t.lang_id = l.id " +
                 "INNER JOIN translations tp ON tp.page = t.text " +
@@ -77,10 +77,10 @@ public class LangDao {
         translation.setLanguage(language);
         translation.setId(rs.getLong("t_id"));
         translation.setPage(rs.getString("t_page"));
-        translation.setPage(rs.getString("tp_page"));
+//        translation.setPage(rs.getString("tp_page"));
         translation.setText(rs.getString("t_text"));
         translation.setKey(rs.getString("t_key"));
-        translation.setKey(rs.getString("tk_key"));
+//        translation.setKey(rs.getString("tk_key"));
 
 
         return translation;

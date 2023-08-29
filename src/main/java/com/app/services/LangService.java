@@ -2,6 +2,7 @@ package com.app.services;
 
 import com.app.dao.LangDao;
 import com.app.model.Language;
+import com.app.model.Translation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +19,9 @@ public class LangService {
 
     public void storeLanguage(Language language) {
         langDao.storeLanguages(language);
+    }
+
+    public void storeTranslation(Translation translation) {
+        langDao.storeTranslation(translation);
     }
 }

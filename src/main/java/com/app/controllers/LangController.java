@@ -1,6 +1,7 @@
 package com.app.controllers;
 
 import com.app.model.Language;
+import com.app.model.Translation;
 import com.app.services.LangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,19 @@ public class LangController {
     @PostMapping("/language")
     public String languageRegister(@ModelAttribute Language language, Model model) {
         langService.storeLanguage(language);
+        return "redirect:/language";
+    }
+
+    @GetMapping("/translation")
+    public String getTranslation(Model model) {
+        model.addAttribute("translationData", new Translation());
+
+        return "translation";
+    }
+
+    @PostMapping("/translation")
+    public String translationRegister(@ModelAttribute Translation translation, Model model) {
+        langService.storeTranslation(translation);
         return "redirect:/language";
     }
 }
