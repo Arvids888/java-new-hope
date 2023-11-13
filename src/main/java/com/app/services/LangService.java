@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class LangService {
@@ -19,6 +20,10 @@ public class LangService {
 
     public void storeLanguage(Language language) {
         langDao.storeLanguages(language);
+    }
+
+    public List<Translation> getTranslation() {
+        return langDao.getTranslation();
     }
 
     public void storeTranslation(Translation translation) {

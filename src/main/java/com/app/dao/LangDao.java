@@ -54,7 +54,7 @@ public class LangDao {
 
     }
 
-    private List<Translation> getTranslation() {
+    public List<Translation> getTranslation() {
         RowMapper<Translation> rowMapper = (rs, rowNumber) -> mapTranslation(rs);
 
         return jdbcTemplate.query("SELECT t.id AS t_id, t.page AS t_page, t.text AS t_text, t.key AS t_key," +

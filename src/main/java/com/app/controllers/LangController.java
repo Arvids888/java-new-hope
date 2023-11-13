@@ -49,6 +49,7 @@ public class LangController {
     @GetMapping("/translation")
     public String getTranslation(Model model) {
         model.addAttribute("translationData", new Translation());
+        model.addAttribute("translation", langService.getTranslation());
 
         return "translation";
     }
