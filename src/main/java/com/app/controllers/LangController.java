@@ -23,6 +23,7 @@ public class LangController {
         long langId = Long.parseLong(session.getAttribute("lang").toString());
 
         model.addAttribute("translations", langService.getTranslations(langId, "homePage"));
+        model.addAttribute("language", langService.getLanguage());
 
         return "translation_example";
     }
@@ -43,20 +44,6 @@ public class LangController {
     @PostMapping("/language")
     public String languageRegister(@ModelAttribute Language language, Model model) {
         langService.storeLanguage(language);
-        return "redirect:/language";
-    }
-
-    @GetMapping("/translation")
-    public String getTranslation(Model model) {
-        model.addAttribute("translationData", new Translation());
-        model.addAttribute("translation", langService.getTranslation());
-
-        return "translation";
-    }
-
-    @PostMapping("/translation")
-    public String translationRegister(@ModelAttribute Translation translation, Model model) {
-        langService.storeTranslation(translation);
         return "redirect:/language";
     }
 }

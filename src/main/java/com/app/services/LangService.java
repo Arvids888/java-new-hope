@@ -22,11 +22,7 @@ public class LangService {
         langDao.storeLanguages(language);
     }
 
-    public List<Translation> getTranslation() {
-        return langDao.getTranslation();
-    }
-
-    public void storeTranslation(Translation translation) {
-        langDao.storeTranslation(translation);
+    public List<Language> getLanguage() {
+        return langDao.getLanguage();
     }
 }

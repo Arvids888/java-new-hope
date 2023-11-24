@@ -4,12 +4,13 @@
         <meta charset="UTF-8">
         <title>Translation example</title>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-        <script th:src="@{js/main.js}"></script>
+        <script th:src="@{/js/main.js}"></script>
     </head>
     <body>
         <div th:text="${translations['hello']}"></div>
-        <div onclick="setLang('1')">LV</div>
-        <div onclick="setLang('2')">RU</div>
-        <div onclick="setLang('3')">EN</div>
+        </div>
+        <div th:each="l : ${language}">
+        <div th:onclick="'setLang('+ *{l.id} +')'" th:text="${l.label}"></div>
+        </div>
     </body>
 </html>

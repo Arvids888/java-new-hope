@@ -6,6 +6,9 @@ public class Language {
     private String name;
     private String label;
 
+    public Language() {
+    }
+
     public long getId() {
         return id;
     }
